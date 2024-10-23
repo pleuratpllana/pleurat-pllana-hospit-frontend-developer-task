@@ -21,7 +21,6 @@ The application also focuses on handling API requests to interact with user data
 
 - **Tailwind CSS for Styling**: The project uses **Tailwind CSS** for fast, efficient, and highly customizable styling. This ensures that the design is modern, clean, and aligned with the Hospit branding guidelines.
 
-
 ## Technologies Used
 
 - **Tailwind CSS**: For styling the components and ensuring the design is clean, modern, and responsive.
@@ -39,16 +38,25 @@ This API provides mock data, allowing the application to focus on handling the f
 
 ## How It Works
 
+1. **Adding a User**:
+   - Navigate to the form and fill in the required fields: Name, Email, and Phone.
+   - Click "Add User" to submit the form.
+   - The new user will be added to the list of users.
+
+2. **Editing a User**:
+   - Click the "Edit" button next to a user in the list.
+   - Modify the user's details and click "Update User" to save changes.
+   
+3. **Deleting a User**:
+   - Click the "Delete" button next to a user in the list.
+   - Confirm the deletion in the modal that appears.
+
+4. **Validation**:
+   - Each form field is validated, and error messages will appear if required fields are missing or improperly formatted (e.g., invalid email address).
+
 ### Screenshots
 
-- **User Form**:
-  ![User Form](assets/screenshot1.png)
-
-- **User List**:
-  ![User List](assets/screenshot2.png)
-
-- **Editing User**:
-  ![Editing User](assets/screenshot3.png)
-
-- **Delete Confirmation**:
-  ![Delete Confirmation](assets/screenshot4.png)
+<img src="assets/screenshot1.png" alt="Screenshot 1" width="700"/>
+<img src="assets/screenshot2.png" alt="Screenshot 2" width="700"/>
+<img src="assets/screenshot3.png" alt="Screenshot 3" width="700"/>
+<img src="assets/screenshot4.png" alt="Screenshot 4" width="700"/>
