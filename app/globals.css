@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: url("./assets/pattern-background.jpg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+@font-face {
+  font-family: "GeistVF";
+  src: url("/fonts/GeistVF.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GeistMonoVF";
+  src: url("/fonts/GeistMonoVF.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  color: #fff;
+  position: relative;
+  font-family: "GeistVF", sans-serif;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  filter: blur(3px);
+  z-index: -1;
+}
+
+/* Table additional/custom styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  min-width: 1170px !important;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 14px;
+}
+
+table th {
+  background-color: #f2f2f240;
+  color: #fff;
+  text-align: left;
+}
+
+table td button {
+  margin-right: 5px;
+}
+
+tr {
+  border: none;
+}
+/* ----------------------------------- */
+
+/* Input custom styling */
+
+input:not(:first-of-type) {
+  margin-left: 20px;
+}
+
+input::placeholder {
+  color: #ffffff90 !important;
+  transition: color 0.4s ease-in-out;
+}
+
+input:focus::placeholder {
+  color: #ddd;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 3px #fff;
+  color: #fff;
+}
+
+label {
+  color: #fff !important;
+}
+/* ----------------------------------- */
+
+/* Add user button custom styling*/
+.submitBtn {
+  padding: 17px 30px !important;
+  margin-top: 27px !important;
+}
+
+/* ----------------------------------- */
+
+/* Edit/Delete user buttons custom styling */
+.userBtns {
+  border-top: none;
+  margin-bottom: -0.5px;
+}
+/* ----------------------------------- */
+
+/* Custom small-screens query */
+@media screen and (max-width: 767px) {
+  body {
+    padding: 50px 5px !important;
+  }
+
+  label {
+    margin-top: 20px;
+  }
+}
+
+/* ----------------------------------- */
