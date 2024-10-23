@@ -21,17 +21,11 @@ The application also focuses on handling API requests to interact with user data
 
 - **Tailwind CSS for Styling**: The project uses **Tailwind CSS** for fast, efficient, and highly customizable styling. This ensures that the design is modern, clean, and aligned with the Hospit branding guidelines.
 
-- **Error Handling and Validation**:
-  - Each form field (name, email, phone) is validated to ensure required fields are filled out.
-  - The email field is validated using a regex pattern to ensure correct formatting.
-  - Invalid inputs are highlighted with red borders, and users receive immediate feedback when they begin typing again.
-
-- **Success Feedback**: After successfully submitting the form (whether adding or updating a user), users receive a success message, indicating that their action was successful.
 
 ## Technologies Used
 
-- **React**: The core framework for building the user interface and handling state management.
 - **Tailwind CSS**: For styling the components and ensuring the design is clean, modern, and responsive.
+- **React**: The core framework for building the user interface and handling state management.
 - **React Icons**: For incorporating icons into the UI, such as the add and edit icons on the form buttons.
 - **API Handling**: API interactions to fetch, create, update, and delete users using the provided API endpoint.
 
