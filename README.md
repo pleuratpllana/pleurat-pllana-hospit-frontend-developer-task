@@ -56,7 +56,7 @@ This API provides mock data, allowing the application to focus on handling the f
 
 ### Screenshots
 
-<img src="./assets/screenshot1.png" alt="Screenshot 1" width="700"/>
-<img src="./assets/screenshot2.png" alt="Screenshot 2" width="700"/>
-<img src="./assets/screenshot3.png" alt="Screenshot 3" width="700"/>
-<img src="./assets/screenshot4.png" alt="Screenshot 4" width="700"/>
+<img src="assets/screenshot1.png" alt="Screenshot 1" width="700"/>
+<img src="assets/screenshot2.png" alt="Screenshot 2" width="700"/>
+<img src="assets/screenshot3.png" alt="Screenshot 3" width="700"/>
+<img src="assets/screenshot4.png" alt="Screenshot 4" width="700"/>
