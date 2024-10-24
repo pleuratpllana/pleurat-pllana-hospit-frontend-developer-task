@@ -9,7 +9,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 🗑 Delete Vercel Deployments
+      - name: 🗑 Deactivate all deployments
+        uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          environment: production
+          onlyDeactivateDeployments: true
+
+      - name: 🗑 Delete all deployments after deactivation
         uses: strumwolf/delete-deployment-environment@v2
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
