@@ -1,7 +1,10 @@
 import { FaUserPlus, FaUserEdit } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-function UserForm({ onSubmit, editingUser, isModalOpen }) {
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function UserForm({ onSubmit, editingUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -17,26 +20,46 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
       setPhone(editingUser.phone || "");
       setSuccessMessage("");
     } else {
-      setName("");
-      setEmail("");
-      setPhone("");
-      setSuccessMessage("");
+      resetForm();
     }
   }, [editingUser]);
 
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setSuccessMessage("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (validateFields()) return;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    onSubmit({
+      id: editingUser ? editingUser.id : uuidv4(),
+      name,
+      email,
+      phone,
+    });
 
+    resetForm();
+
+    setSuccessMessage(
+      editingUser ? "User updated successfully!" : "User added successfully!"
+    );
+
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
+  };
+
+  const validateFields = () => {
     let hasError = false;
 
-    // Check for empty fields and validate email format
     if (name.trim() === "") {
       setNameError("Name is required.");
       hasError = true;
     }
-
     if (email.trim() === "") {
       setEmailError("Email is required.");
       hasError = true;
@@ -50,31 +73,7 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
       hasError = true;
     }
 
-    // Stop form submission if there are errors
-    if (hasError) return;
-
-    // Use the onSubmit prop to handle both add or update
-    onSubmit({
-      id: editingUser ? editingUser.id : Date.now(),
-      name,
-      email,
-      phone,
-    });
-
-    // Set success message based on whether editing or adding
-    setSuccessMessage(
-      editingUser ? "User updated successfully!" : "User added successfully!"
-    );
-
-    // Clear form fields after submission
-    setName("");
-    setEmail("");
-    setPhone("");
-
-    // Automatically clear the success message after 3 seconds
-    setTimeout(() => {
-      setSuccessMessage("");
-    }, 3000);
+    return hasError;
   };
 
   const handleInputChange = (setter, errorSetter) => (e) => {
@@ -82,7 +81,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
     errorSetter("");
   };
 
-  // Apply red border if there's an error
   const inputClasses = (hasError) =>
     `mt-2 w-full p-4 bg-transparent border ${
       hasError ? "border-red-500" : "border-gray-300"
@@ -95,7 +93,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
         onSubmit={handleSubmit}
         className="mt-8 flex flex-col lg:flex-row lg:items-center lg:gap-6 w-full"
       >
-        {/* Name Input */}
         <div className="flex-1">
           <label
             htmlFor="name"
@@ -118,7 +115,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
           )}
         </div>
 
-        {/* Email Address Input */}
         <div className="flex-1">
           <label
             htmlFor="email"
@@ -141,7 +137,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
           )}
         </div>
 
-        {/* Phone Number Input */}
         <div className="flex-1">
           <label
             htmlFor="phone"
@@ -164,7 +159,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
           )}
         </div>
 
-        {/* Submit Form Button*/}
         <button
           type="submit"
           className="submitBtn mt-5 lg:mt-0 lg:flex-none py-5 px-6 bg-[#2c90c0] text-white font-bold rounded-md hover:bg-white hover:text-[#2c90c0] transition-colors duration-300 focus:ring-2 focus:ring-[#199bcb] focus:outline-none flex items-center justify-center"
@@ -181,7 +175,6 @@ function UserForm({ onSubmit, editingUser, isModalOpen }) {
         </button>
       </form>
 
-      {/* Success Message */}
       {successMessage && (
         <p className="mt-4 text-white text-sm italic">{successMessage}</p>
       )}

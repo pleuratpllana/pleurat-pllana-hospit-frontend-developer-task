@@ -21,7 +21,7 @@ export default function Home() {
       try {
         const data = await fetchUsers();
         setUsers(data);
-      } catch (error) {
+      } catch {
         setApiError(
           "Unable to fetch users at the moment. Please try again later."
         );
@@ -32,12 +32,12 @@ export default function Home() {
   }, []);
 
   const handleAddUser = (newUser) => {
-    setUsers([newUser, ...users]);
+    setUsers((prevUsers) => [newUser, ...prevUsers]);
   };
 
   const handleUpdateUser = (updatedUser) => {
-    setUsers(
-      users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
     );
     setEditingUser(null);
     setIsModalOpen(false);
@@ -55,7 +55,9 @@ export default function Home() {
 
   const confirmDelete = () => {
     if (userToDelete) {
-      setUsers(users.filter((user) => user.id !== userToDelete.id));
+      setUsers((prevUsers) =>
+        prevUsers.filter((user) => user.id !== userToDelete.id)
+      );
       setIsDeleteModalOpen(false);
       setUserToDelete(null);
     }
@@ -84,35 +86,25 @@ export default function Home() {
           </p>
         </div>
 
-        {/* CreateUserForm outside modal (normal form) */}
         <UserForm
           onSubmit={editingUser ? handleUpdateUser : handleAddUser}
           editingUser={editingUser}
-          isModalOpen={false}
         />
 
-        {/* Error emssage in case the API falls to fetch*/}
         {apiError && (
           <p className="text-red-400 text-center mb-4">{apiError}</p>
         )}
 
-        {/* User List */}
         <UserList
           users={users}
           onEdit={handleEditUser}
           onDelete={handleDeleteUser}
         />
 
-        {/* Modal for editing a user */}
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <UserForm
-            onSubmit={editingUser ? handleUpdateUser : handleAddUser}
-            editingUser={editingUser}
-            isModalOpen={isModalOpen}
-          />
+          <UserForm onSubmit={handleUpdateUser} editingUser={editingUser} />
         </Modal>
 
-        {/* Modal to confirm the deletion */}
         <Modal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
           <div>
             <h2 className="text-lg font-semibold">
