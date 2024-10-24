@@ -9,16 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 🗑 Deactivate all deployments
+      # First, delete deployments for the first environment
+      - name: 🗑 Delete Deployments from first environment
         uses: strumwolf/delete-deployment-environment@v2
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          environment: production
-          onlyDeactivateDeployments: true
+          environment: production-pleurat-pllana-hospit-frontend-developer-task
+          onlyRemoveDeployments: true
 
-      - name: 🗑 Delete all deployments after deactivation
+      # Then, delete deployments for the second environment
+      - name: 🗑 Delete Deployments from second environment
         uses: strumwolf/delete-deployment-environment@v2
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          environment: production
+          environment: production-pleurat-pllana-hospit-frontend-developer-task-7a6x
           onlyRemoveDeployments: true
