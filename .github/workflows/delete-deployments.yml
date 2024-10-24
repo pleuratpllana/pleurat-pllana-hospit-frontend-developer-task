@@ -9,10 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Use the deployment cleanup action to delete Vercel deployments
       - name: 🗑 Delete Vercel Deployments
         uses: strumwolf/delete-deployment-environment@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           environment: production
           onlyRemoveDeployments: true
